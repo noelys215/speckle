@@ -57,7 +57,7 @@ export const NavBar = () => {
 							cursor: 'pointer',
 						},
 					}}>
-					Sociopedia
+					Speckle
 				</Typography>
 				{isNonMobileScreens && (
 					<FlexBetween
