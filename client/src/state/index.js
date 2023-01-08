@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-//* This data will be available throughout app.
 const initialState = {
 	mode: 'light',
 	user: null,
@@ -12,7 +11,9 @@ export const authSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
-		setMode: (state) => (state.mode = state.mode === 'light' ? 'dark' : 'light'),
+		setMode: (state) => {
+			state.mode = state.mode === 'light' ? 'dark' : 'light';
+		},
 		setLogin: (state, action) => {
 			state.user = action.payload.user;
 			state.token = action.payload.token;
@@ -22,11 +23,15 @@ export const authSlice = createSlice({
 			state.token = null;
 		},
 		setFriends: (state, action) => {
-			state.user
-				? (state.user.friends = action.payload)
-				: console.error('User friends non-existent :c ');
+			if (state.user) {
+				state.user.friends = action.payload.friends;
+			} else {
+				console.error('user friends non-existent :(');
+			}
 		},
-		setPosts: (state, action) => (state.posts = action.payload.posts),
+		setPosts: (state, action) => {
+			state.posts = action.payload.posts;
+		},
 		setPost: (state, action) => {
 			const updatedPosts = state.posts.map((post) => {
 				if (post._id === action.payload.post._id) return action.payload.post;
