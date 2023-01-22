@@ -6,8 +6,8 @@ export const getUser = async (req, res) => {
 		const { id } = req.params;
 		const user = await User.findById(id);
 		res.status(200).json(user);
-	} catch ({ message }) {
-		res.status(404).json({ message: message });
+	} catch (err) {
+		res.status(404).json({ message: err.message });
 	}
 };
 
@@ -20,7 +20,14 @@ export const getUserFriends = async (req, res) => {
 
 		const formattedFriends = friends.map(
 			({ _id, firstName, lastName, occupation, location, picturePath }) => {
-				_id, firstName, lastName, occupation, location, picturePath;
+				return {
+					_id,
+					firstName,
+					lastName,
+					occupation,
+					location,
+					picturePath,
+				};
 			}
 		);
 

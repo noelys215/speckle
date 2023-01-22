@@ -34,9 +34,11 @@ export const UserWidget = ({ userId, picturePath }) => {
 		getUser();
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-	if (!user) return null;
+	if (!user) {
+		return null;
+	}
 
-	const { firstName, lastName, occupation, location, viewedProfile, impressions, friends } = user;
+	const { firstName, lastName, location, occupation, viewedProfile, impressions, friends } = user;
 
 	return (
 		<WidgetWrapper>
@@ -57,7 +59,7 @@ export const UserWidget = ({ userId, picturePath }) => {
 							}}>
 							{firstName} {lastName}
 						</Typography>
-						<Typography color={medium}>{friends.length} specs</Typography>
+						<Typography color={medium}>{friends.length} friends</Typography>
 					</Box>
 				</FlexBetween>
 				<ManageAccountsOutlined />
